@@ -34,7 +34,8 @@ const Signup = ({ navigation }) => {
   };
 
   const registerUser = () => {
-    if (email === "" && password === "") {
+    console.log("Signing up...");
+    if (email === "" || password === "") {
       Alert.alert("Enter details to signup!");
     } else {
       setIsLoading(true);
@@ -42,17 +43,21 @@ const Signup = ({ navigation }) => {
         .auth()
         .createUserWithEmailAndPassword(email, password)
         .then((res) => {
+          console.log("User registered successfully!", res.user);
           res.user.updateProfile({
             displayName: displayName,
           });
-          console.log("User registered successfully!");
           setIsLoading(false);
           setDisplayName("");
           setEmail("");
           setPassword("");
-          navigation.navigate("Login");
+          navigation.navigate("EmailVerification"); // Navigate to the email verification screen
         })
-        .catch((error) => setErrorMessage(error.message));
+        .catch((error) => {
+          console.error("Error during sign-up:", error.message);
+          setIsLoading(false);
+          setErrorMessage(error.message);
+        });
     }
   };
 

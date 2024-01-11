@@ -5,6 +5,7 @@ import { createStackNavigator } from "@react-navigation/stack";
 import Login from "./components/Login";
 import Signup from "./components/SignUp";
 import Dashboard from "./components/Dashboard";
+import EmailVerification from "./components/EmailVerification";
 const Stack = createStackNavigator();
 function MyStack() {
   return (
@@ -41,6 +42,11 @@ function MyStack() {
           title: "Dashboard",
           headerLeft: null,
         }}
+      />
+      <Stack.Screen
+        name="EmailVerification" // Add this line
+        component={EmailVerification} // Add this line
+        options={{ title: "Email Verification" }} // Add this line
       />
     </Stack.Navigator>
   );
